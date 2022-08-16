@@ -2,24 +2,30 @@ import _ from "lodash";
 import pageLogo from "./pngwing.com.png";
 import './style.css';
 
-(() => {
-  const contentElement = document.createElement('div')
-  contentElement.setAttribute('id', 'content')
+const domModule = (() => {
+  const divEle = function() {return document.createElement('div')};
+  const navEle = function() {return document.createElement('nav')};
 
-  document.body.appendChild(contentElement)
+  const setEleAtribute = (atr, atrName, elementVar) => {    
+    return elementVar.setAttribute(atr, atrName)
+  }
 
-  const navElement = document.createElement('nav')
-  navElement.setAttribute('class', 'nav_wrap')
+  // const navElement = document.querySelector('.nav_wrap')
+  // contentElement.setAttribute('id', 'content')
 
-  contentElement.appendChild(navElement)
+  
+  // navEle.setAttribute('class', 'nav_wrap')
+  
+  // document.body.appendChild(contentElement)
+  // contentElement.appendChild(newNav)
+
+
+  return { setEleAtribute, divEle, navEle } 
 })();
 
-const mainElement = document.querySelector('#content')
-const navElement = document.querySelector('.nav_wrap')
-
 let addImage = (source, className) => {
-  const imgElement = document.createElement('div');
-  imgElement.setAttribute('class', className)
+  const imgElement = domModule.divEle();
+  domModule.setEleAtribute('class', className, imgElement)
 
   const myLogo = new Image();
   myLogo.src = source;
@@ -29,9 +35,18 @@ let addImage = (source, className) => {
   return imgElement;
 }
 
-navElement.appendChild(addImage(pageLogo, 'logo_container'));
+const mainPage = () => {
+  const contentEle = domModule.divEle();
+  domModule.setEleAtribute('id', 'content', contentEle)
 
+  const navEle = domModule.navEle();
+  domModule.setEleAtribute('class', 'nav_wrap', navEle)
 
-// contentElement.appendChild(addImage());
+  document.body.appendChild(contentEle);
+  contentEle.appendChild(navEle)
 
-console.log("I work now?");
+  navEle.appendChild(addImage(pageLogo, "logo_container"))
+  return
+}
+
+mainPage()
