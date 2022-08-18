@@ -1,0 +1,2 @@
+import { domModule } from "./index";
+

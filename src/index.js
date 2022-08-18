@@ -5,26 +5,28 @@ import './style.css';
 const domModule = (() => {
   const divEle = function() {return document.createElement('div')};
   const navEle = function() {return document.createElement('nav')};
-  const pEle = function () {return document.createElement('p')};
+  const btnEle = function () {return document.createElement('button')};
 
   const setEleAtribute = (atr, atrName, elementVar) => {    
     return elementVar.setAttribute(atr, atrName)
   }
 
-  return { setEleAtribute, divEle, navEle, pEle } 
+  const addImage = (source, className) => {
+    const imgElement = domModule.divEle();
+    domModule.setEleAtribute('class', className, imgElement)
+    
+    const myLogo = new Image();
+    myLogo.src = source;
+    
+    imgElement.appendChild(myLogo);
+    
+    return imgElement;
+  }
+  
+  return { setEleAtribute, divEle, navEle, btnEle, addImage } 
 })();
 
-let addImage = (source, className) => {
-  const imgElement = domModule.divEle();
-  domModule.setEleAtribute('class', className, imgElement)
 
-  const myLogo = new Image();
-  myLogo.src = source;
-
-  imgElement.appendChild(myLogo);
-
-  return imgElement;
-}
 
 const mainPage = () => {
   const contentEle = domModule.divEle();
@@ -34,7 +36,7 @@ const mainPage = () => {
   const navEle = domModule.navEle();
   domModule.setEleAtribute('class', 'nav_wrap', navEle)
   contentEle.appendChild(navEle)
-  navEle.appendChild(addImage(pageLogo, "logo_container"))
+  navEle.appendChild(domModule.addImage(pageLogo, "logo_container"))
 
   const navBtns = domModule.divEle();
   domModule.setEleAtribute('class', "btn_wrapper", navBtns)
@@ -44,15 +46,18 @@ const mainPage = () => {
     let divEle = domModule.divEle();
     domModule.setEleAtribute("class", "item_container", divEle)
 
-    let pEleNames = ['Home', 'Menu', 'Contact']
-    let pEle = domModule.pEle();
-    domModule.setEleAtribute("class", "nav_btn", pEle)
-    pEle.textContent = pEleNames[i];
+    let btnEleNames = ['Home', 'Menu', 'Contact']
+    let btnEle = domModule.btnEle();
+    domModule.setEleAtribute("class", "nav_btn", btnEle)
+    btnEle.textContent = btnEleNames[i];
 
-    divEle.appendChild(pEle);    
+    divEle.appendChild(btnEle);    
     navBtns.appendChild(divEle)
   }
+
   return
 }
 
 mainPage()
+
+export { domModule };
