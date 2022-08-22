@@ -1,19 +1,22 @@
 import _ from "lodash";
 import pageLogo from "./pngwing.com.png";
 import './style.css';
+import { homePageGen } from "./homePage";
 
 const domModule = (() => {
   const divEle = function() {return document.createElement('div')};
   const navEle = function() {return document.createElement('nav')};
-  const btnEle = function () {return document.createElement('button')};
+  const btnEle = function() {return document.createElement('button')};
+  const imgEle = function() {return document.createElement('img')};
+  const qEle = function() {return document.createElement('q')};
 
   const setEleAtribute = (atr, atrName, elementVar) => {    
-    return elementVar.setAttribute(atr, atrName)
-  }
+    return elementVar.setAttribute(atr, atrName);
+  };
 
   const addImage = (source, className) => {
     const imgElement = domModule.divEle();
-    domModule.setEleAtribute('class', className, imgElement)
+    domModule.setEleAtribute('class', className, imgElement);
     
     const myLogo = new Image();
     myLogo.src = source;
@@ -21,9 +24,9 @@ const domModule = (() => {
     imgElement.appendChild(myLogo);
     
     return imgElement;
-  }
+  };
   
-  return { setEleAtribute, divEle, navEle, btnEle, addImage } 
+  return { setEleAtribute, divEle, navEle, btnEle, addImage, imgEle, qEle } 
 })();
 
 
@@ -59,5 +62,6 @@ const mainPage = () => {
 }
 
 mainPage()
+homePageGen();
 
 export { domModule };
