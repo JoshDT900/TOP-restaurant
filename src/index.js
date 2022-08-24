@@ -4,18 +4,14 @@ import './style.css';
 import { homePageGen } from "./homePage";
 
 const domModule = (() => {
-  const divEle = function() {return document.createElement('div')};
-  const navEle = function() {return document.createElement('nav')};
-  const btnEle = function() {return document.createElement('button')};
-  const imgEle = function() {return document.createElement('img')};
-  const qEle = function() {return document.createElement('q')};
+  const createEle = function(eleName) {return document.createElement(eleName)};
 
   const setEleAtribute = (atr, atrName, elementVar) => {    
     return elementVar.setAttribute(atr, atrName);
   };
 
   const addImage = (source, className) => {
-    const imgElement = domModule.divEle();
+    const imgElement = domModule.createEle('div');
     domModule.setEleAtribute('class', className, imgElement);
     
     const myLogo = new Image();
@@ -26,32 +22,33 @@ const domModule = (() => {
     return imgElement;
   };
   
-  return { setEleAtribute, divEle, navEle, btnEle, addImage, imgEle, qEle } 
+  return { setEleAtribute, addImage, createEle } 
 })();
 
-
-
 const mainPage = () => {
-  const contentEle = domModule.divEle();
+  const contentEle = domModule.createEle('div');
   domModule.setEleAtribute('id', 'content', contentEle)
   document.body.appendChild(contentEle);
 
-  const navEle = domModule.navEle();
+  const navEle = domModule.createEle('nav');
   domModule.setEleAtribute('class', 'nav_wrap', navEle)
   contentEle.appendChild(navEle)
   navEle.appendChild(domModule.addImage(pageLogo, "logo_container"))
 
-  const navBtns = domModule.divEle();
+  const navBtns = domModule.createEle('div');
   domModule.setEleAtribute('class', "btn_wrapper", navBtns)
   navEle.appendChild(navBtns)
 
   for (let i = 0; i < 3; i++){
-    let divEle = domModule.divEle();
+    let divEle = domModule.createEle('div');
     domModule.setEleAtribute("class", "item_container", divEle)
 
     let btnEleNames = ['Home', 'Menu', 'Contact']
-    let btnEle = domModule.btnEle();
-    domModule.setEleAtribute("class", "nav_btn", btnEle)
+    let btnFuncs = [homePageGen]
+    let btnEle = domModule.createEle('button');
+    domModule.setEleAtribute("class", `nav_btn`, btnEle)
+
+    btnEle.addEventListener('click', btnFuncs[0])    
     btnEle.textContent = btnEleNames[i];
 
     divEle.appendChild(btnEle);    
@@ -62,6 +59,5 @@ const mainPage = () => {
 }
 
 mainPage()
-homePageGen();
 
 export { domModule };
