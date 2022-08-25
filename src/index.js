@@ -1,4 +1,3 @@
-import _ from "lodash";
 import pageLogo from "./pngwing.com.png";
 import './style.css';
 import { homePageGen } from "./homePage";
