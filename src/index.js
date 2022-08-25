@@ -1,6 +1,7 @@
 import pageLogo from "./pngwing.com.png";
 import './style.css';
 import { homePageGen } from "./homePage";
+import { menuPageGen } from "./menuPage";
 
 const domModule = (() => {
   const createEle = function(eleName) {return document.createElement(eleName)};
@@ -43,11 +44,11 @@ const mainPage = () => {
     domModule.setEleAtribute("class", "item_container", divEle)
 
     let btnEleNames = ['Home', 'Menu', 'Contact']
-    let btnFuncs = [homePageGen]
+    let btnFuncs = [homePageGen, menuPageGen, menuPageGen]
     let btnEle = domModule.createEle('button');
     domModule.setEleAtribute("class", `nav_btn`, btnEle)
 
-    btnEle.addEventListener('click', btnFuncs[0])    
+    btnEle.addEventListener('click', btnFuncs[i])    
     btnEle.textContent = btnEleNames[i];
 
     divEle.appendChild(btnEle);    
@@ -58,5 +59,6 @@ const mainPage = () => {
 }
 
 mainPage()
+menuPageGen()
 
 export { domModule };
