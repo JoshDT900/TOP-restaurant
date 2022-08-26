@@ -29,6 +29,11 @@ const menuItemObj = [
   
 
 const largeMenuGen = () => {
+  if (document.querySelector('.content_wrap')) {
+    let removeEle = document.querySelector('.content_wrap');
+    removeEle.remove()
+  }
+
   const mainContent = document.querySelector('#content');
   
   const contentWrapEle = domModule.createEle('div');
@@ -123,15 +128,11 @@ const menuSwap = (i) => {
       replaceText.textContent = `Total Calories: ${menuItemObj[i].calories}`;
     }
   }
-  return
+  return console.log('works?');
 }
 
 
 const menuPageGen = () => {
-  if (document.querySelector('.content_wrap')) {
-    let removeEle = document.querySelector('.content_wrap');
-    removeEle.remove();
-  }
 
   largeMenuGen();
   menuSelection();

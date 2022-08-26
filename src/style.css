@@ -116,6 +116,7 @@ button.nav_btn:hover {
   flex-direction: column;
   gap: 50px;
   justify-content: space-between;
+  width: 100%;
 }
 
 h2.dish_name {
