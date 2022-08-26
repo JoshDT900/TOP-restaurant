@@ -1,9 +1,32 @@
 import { domModule } from "./index";
-import largeMenuImage from "./ali-nafezarefi-IaJKIBONv_o-unsplash.jpg"
-import firstImg from "./ali-nafezarefi-IaJKIBONv_o-unsplash.jpg"
-import secondImg from "./cindy-fernandez--xQSnYEzUVQ-unsplash.jpg"
-import thirdImg from "./miha-rekar-kWEkH7j3KNI-unsplash.jpg"
+import spaghettiImg from "./ali-nafezarefi-IaJKIBONv_o-unsplash.jpg"
+import brownieImg from "./cindy-fernandez--xQSnYEzUVQ-unsplash.jpg"
+import pizzaImg from "./miha-rekar-kWEkH7j3KNI-unsplash.jpg"
 
+const menuItemObj = [  
+  {
+    name: 'Spaghetti and Meatballs',
+    description: "A lucious blend of meat, noodies, and sssauuucee. Put it in your mouth and feel the pleasure wash over you.",
+    price: "$14.99",
+    calories: "850",
+    image: spaghettiImg,
+  },
+  {
+    name: 'Brownies',
+    description: "Chocolaty, fudgy goodness. Server hot and fresh with a side of Ice Cream. YUM! PUT IT IN MY MOUTH!",
+    price: "$9.99",
+    calories: "1150",
+    image: brownieImg,
+  },
+  {
+    name: 'Classic Margherita Pizza',
+    description: "Ayyy, it's fookin Pizza. Ya slice it and eat it, ayyyyyyy.",
+    price: "$21.99",
+    calories: "1450",
+    image: pizzaImg,
+  }  
+]
+  
 
 const largeMenuGen = () => {
   const mainContent = document.querySelector('#content');
@@ -28,7 +51,7 @@ const largeMenuGen = () => {
   const largeMenuEle = document.querySelector(".large_menu_item");
   
   const lrgmenuImg = domModule.createEle('img');
-  domModule.setEleAtribute('src', largeMenuImage, lrgmenuImg);
+  domModule.setEleAtribute('src', menuItemObj[0].image, lrgmenuImg);
   largeMenuEle.appendChild(lrgmenuImg);
   
   const menuDetailsEle = domModule.createEle('div');
@@ -43,7 +66,7 @@ const largeMenuGen = () => {
   
   const dishDetailEle = domModule.createEle('p')
   domModule.setEleAtribute('class','dish_details', dishDetailEle)
-  dishDetailEle.textContent = 'Words about dish, then some more about it. Also a lot more words that I can\'t really think of atm, but I will fill this in later... maybe.';
+  dishDetailEle.textContent = menuItemObj[0].description;
   
   menuDetailsEle.appendChild(dishDetailEle);
   
@@ -53,7 +76,7 @@ const largeMenuGen = () => {
   for (let i = 0; i < 2; i++){
     let pEle = domModule.createEle('p')
     let pEleClass = ["price_display", "dish_calories"]
-    let pEleText = ["$14.99", "Calories: 850"]
+    let pEleText = [`Price: ${menuItemObj[0].price}`, `Total Calories: ${menuItemObj[0].calories}`]
     
     domModule.setEleAtribute('class', pEleClass[i], pEle);
     pEle.textContent = pEleText[i];
@@ -74,12 +97,33 @@ const menuSelection = () => {
 
   const menuSelection = document.querySelector(".menu_selection")
 
-  for (let i = 0; i < 3; i++){
-    let imgArray = [firstImg, secondImg, thirdImg]
-    let imgEle = domModule.addImage(imgArray[i], `menuItem${i+1}`)
-
+  for (let i = 0; i < menuItemObj.length; i++){
+    let imgEle = domModule.addImage(menuItemObj[i].image, `menuItem${i+1}`)
+    
+    imgEle.addEventListener('click', () => {menuSwap(i)})
     menuSelection.appendChild(imgEle);
   }
+}
+
+const menuSwap = (i) => {
+  const swapImg = document.querySelector(".large_menu_item").firstChild;
+  domModule.setEleAtribute('src', menuItemObj[i].image, swapImg)
+  
+  const eleArraySelctors = ["dish_name", "dish_details", "price_display", "dish_calories"]
+  for (let k = 0; k < eleArraySelctors.length; k++){
+    let replaceText = document.querySelector(`.${eleArraySelctors[k]}`);
+
+    if (eleArraySelctors[k] === "dish_name"){
+      replaceText.textContent = menuItemObj[i].name;
+    } else if (eleArraySelctors[k] === "dish_details"){
+      replaceText.textContent = menuItemObj[i].description;
+    } else if (eleArraySelctors[k] === "price_display") {
+      replaceText.textContent = `Price: ${menuItemObj[i].price}`;
+    } else if (eleArraySelctors[k] === "dish_calories"){
+      replaceText.textContent = `Total Calories: ${menuItemObj[i].calories}`;
+    }
+  }
+  return
 }
 
 

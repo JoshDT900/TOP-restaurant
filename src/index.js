@@ -66,6 +66,6 @@ const mainPage = () => {
 }
 
 mainPage()
-menuPageGen()
+homePageGen();
 
 export { domModule };
