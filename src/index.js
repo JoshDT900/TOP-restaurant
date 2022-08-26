@@ -21,8 +21,15 @@ const domModule = (() => {
     
     return imgElement;
   };
+
+  const genElement = (eleType, atrType, atrName) => {
+    let newEle = createEle(eleType);
+    setEleAtribute(atrType, atrName, newEle)
+
+    return newEle;
+  }
   
-  return { setEleAtribute, addImage, createEle } 
+  return { setEleAtribute, addImage, createEle, genElement } 
 })();
 
 const mainPage = () => {
