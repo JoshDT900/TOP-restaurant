@@ -2,6 +2,7 @@ import pageLogo from "./pngwing.com.png";
 import './style.css';
 import { homePageGen } from "./homePage";
 import { menuPageGen } from "./menuPage";
+import { contactPageGen } from "./contactPage";
 
 const domModule = (() => {
   const createEle = function(eleName) {return document.createElement(eleName)};
@@ -22,9 +23,16 @@ const domModule = (() => {
     return imgElement;
   };
 
-  const genElement = (eleType, atrType, atrName) => {
-    let newEle = createEle(eleType);
-    setEleAtribute(atrType, atrName, newEle)
+  const genElement = function() {
+    const argArr = [...arguments];
+    console.log(argArr);
+
+    const newEle = createEle(argArr[0]);
+    if (argArr.length > 1) {
+      setEleAtribute(argArr[1], argArr[2], newEle)
+    }
+
+    console.log(newEle);
 
     return newEle;
   }
@@ -51,7 +59,7 @@ const mainPage = () => {
     domModule.setEleAtribute("class", "item_container", divEle)
 
     let btnEleNames = ['Home', 'Menu', 'Contact']
-    let btnFuncs = [homePageGen, menuPageGen, menuPageGen]
+    let btnFuncs = [homePageGen, menuPageGen, contactPageGen]
     let btnEle = domModule.createEle('button');
     domModule.setEleAtribute("class", `nav_btn`, btnEle)
 
