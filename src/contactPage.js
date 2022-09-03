@@ -1,5 +1,8 @@
 import { domModule } from "./index.js";
 import logoImg from "./pngwing.com.png";
+import fbImg from "./584ac2d03ac3a570f94a666d.png"
+import twtImg from "./580b57fcd9996e24bc43c53e.png"
+import instaImg from "./580b57fcd9996e24bc43c521.png"
 
 const contactPageGen = () => {
   if (document.querySelector('.content_wrap')) {
@@ -15,7 +18,7 @@ const contactPageGen = () => {
   const contentBox = domModule.genElement('div', 'class', 'contact_us_box')
   contentEle.appendChild(contentBox);
 
-  let eleFuncArr = [contactHeadEle, contInfoBoxEle, contLogo]
+  let eleFuncArr = [contactHeadEle, contInfoBoxEle, contLogo, socialBtns]
   for (let eleFunc of eleFuncArr) {
     eleFunc(contentBox);
   }
@@ -61,8 +64,28 @@ const contLogo = (ele) => {
 
   const logoEle = domModule.genElement('img', 'src', logoImg)
   domModule.setEleAtribute('class', 'contact_logo_img', logoEle)
-  logoBox.appendChild(logoEle)
+  logoBox.appendChild(logoEle);
   
+  return
+}
+
+const socialBtns = (ele) => {
+  const socialBtnsBox = domModule.genElement('div', 'class', 'social_btns');
+  ele.appendChild(socialBtnsBox);
+
+  const btnImgArr = [twtImg, fbImg, instaImg];
+  const btnImgClassNames = ['twit_btn', 'fb_btn', 'insta_btn']
+
+  for (let i in btnImgArr) {
+    const newDiv = domModule.genElement('div')
+    const newImg = domModule.genElement('img', 'src', btnImgArr[i])
+    domModule.setEleAtribute('class', btnImgClassNames[i], newImg)
+
+    newDiv.appendChild(newImg);
+    socialBtnsBox.appendChild(newDiv);
+  }
+
+  return
 }
 
 export { contactPageGen }

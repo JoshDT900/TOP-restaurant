@@ -71,6 +71,6 @@ const mainPage = () => {
 }
 
 mainPage()
-contactPageGen();
+homePageGen();
 
 export { domModule };
