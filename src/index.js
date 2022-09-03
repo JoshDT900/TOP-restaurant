@@ -25,14 +25,11 @@ const domModule = (() => {
 
   const genElement = function() {
     const argArr = [...arguments];
-    console.log(argArr);
 
     const newEle = createEle(argArr[0]);
     if (argArr.length > 1) {
       setEleAtribute(argArr[1], argArr[2], newEle)
     }
-
-    console.log(newEle);
 
     return newEle;
   }
@@ -74,6 +71,6 @@ const mainPage = () => {
 }
 
 mainPage()
-homePageGen();
+contactPageGen();
 
 export { domModule };

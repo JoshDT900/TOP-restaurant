@@ -98,10 +98,10 @@ button.nav_btn:hover {
 
 .large_menu_item {
   display: flex;
-  gap: 20px;
   box-shadow: 10px 10px 50px 1px black;
   border: 2px solid black;
   width: 1000px;
+  height: 300px;
 }
 
 .large_menu_item > img {
@@ -115,6 +115,7 @@ button.nav_btn:hover {
   flex-direction: column;
   gap: 50px;
   justify-content: space-between;
+  width: 100%;
 }
 
 h2.dish_name {

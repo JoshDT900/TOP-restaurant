@@ -128,7 +128,7 @@ const menuSwap = (i) => {
       replaceText.textContent = `Total Calories: ${menuItemObj[i].calories}`;
     }
   }
-  return console.log('works?');
+  return;
 }
 
 
